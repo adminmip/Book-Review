@@ -13,8 +13,8 @@ public class StoryLine {
     private String intro = "The year is 3000.  Famine and disease are rampant on Earth."; // The first line.  Will print every time you run the game.
    private String[] storyList = { "1.  A young man named Xerneas is looking for the man who killed his father. He goes on a journey to ________.",
                         "2. A fifty-five-year-old man, Michael, is fighting for his life, on the run from _____.",
-                        "" };
-    private String[][] storyLineChoiceSet1 = { /* The array structure is { "Choice", "number to go to IN STRING FORM", "Choice", "Other number" }*/
+                        "3. Celia, a 16-year-old girl, must learn to survive in a world without her father. He’s ____." };
+    private String[][] choiceSet1 = { /* The array structure is { "Choice", "number to go to IN STRING FORM", "Choice", "Other number" }*/
             {"The police station to file a report about the murder.", "2", "Get retribution for his father’s murder.", "3" , }, // Choice set 1
             {"Wallow in misery, never finding his father’s killer, until he finally dies. The End.", "-1", "Get over it and get on with his life. He starts a family and lives well into his seventies before dying. He never finds his father’s killer.  The End.", "-1"}, // Choice Set 2
             {"No one. He passes a young woman hitchhiking on the side of the road. She claims to have information he might want, but he doesn’t stop; his own journey is the priority.", "4" , "No one. He passes a young woman hitchhiking on the side of the road. She claims to have information he might want, but he doesn’t stop; his own journey is the priority.", "5"}, //  Choice Set 3
@@ -32,7 +32,7 @@ public class StoryLine {
 
     // The index on this array is two behind the actual numbers within the story.
     // We're going to subtract two from the number in the above array to get the correct index.
-    private String[] storyLineResponseSet1 = {"He files the report, and the police promise that they’ll do their best to find the killer, even though the murder was ten years ago. The man leaves the police station and goes to ______.",
+    private String[] responseSet1 = {"He files the report, and the police promise that they’ll do their best to find the killer, even though the murder was ten years ago. The man leaves the police station and goes to ______.",
             "Xerneas traverses the country, looking for clues as to the whereabouts of the killer. On his mission, he meets ",
             "For months he searches with little success, until he finally discovers a message with information about his father’s killer. Xerneas",
             "He goes to the location as a last resort; who knows what could be waiting there? But what does he have left to lose?",
@@ -46,7 +46,7 @@ public class StoryLine {
             "With blood on his hands,",
             "After he leaves, Xerneas finds the killer and"};
 
-    private String[][] storyLineChoiceSet2 = {
+    private String[][] choiceSet2 = {
             {"A young man from his past.", "2", "an unknown threat.", "3"},
             {"but Michael has no idea why Xerneas is trying to kill him.", "4", "and Michael feels immensely guilty about killing the boy’s father.", "5"},
             {"missing.", "6", "right by his side; no one would help them.", "7"},
@@ -70,7 +70,7 @@ public class StoryLine {
 
 
 
-    private String[] storyLineResponseSet2 = {
+    private String[] responseSet2 = {
             "The young man, Xerneas, is one he knows from ten years ago--the night he killed a man with the virus, Bloody X. This is the man’s child that was left behind",
             "Michael sent his daughter, Celia, out to find help, and now she’s",
             "When Xerneas becomes a serious threat to their lives, Michael and Celia decide to",
@@ -93,43 +93,44 @@ public class StoryLine {
 
 
 
-    private String[][] storyLineChoiceSet3 = {
+    private String[][] choiceSet3 = {
             {"MIA. She has to find him.", "2", "Dead.  She has no hope left for the future.", "3"},
             {"tells her to get lost after rambling on about his life, even after she lies about having useful information.", "4", "agrees to help her and tells her of his own search for his father's killer.", "5"},
             {"kill herself. Life isn't woth lirving without her father.", "-1", "make a new life for herself.  She goes to work for the CDC, like her father had before her.  She spends the rest of her life exterminating those infected with Bloody X.", "-1"},
             {"her high school English teacher. That guy once gave her an 89% on a paper--he deserves to die. So she helps kill him.", "-1", "her father. But she wants to find him to... Could Xerneas help her?", "6"},
             {"leave and find her father herself.", "7", "stay with him, keeping the information secret, and use him to find her father.", "8"},
-            {"", "", "", ""},
-            {"", "", "", ""},
-            {"", "", "", ""},
-            {"", "", "", ""},
-            {"", "", "", ""},
-            {"", "", "", ""},
-            {"", "", "", ""},
-            {"", "", "", ""},
-            {"", "", "", ""},
-            {"", "", "", ""},
-            {"", "", "", ""},
+            {"pleads with Xerneas not to kill her father.", "9", "helps Xerneas kill her father, because he was once thirty seconds late for picking her up from ballet.", "10"},
+            {"she gives up and gets on with her life.", "-1", "she contracts the Bloody X virus. The last thing she sees is her father’s face as he kills her.", "-1"},
+            {"dead.", "11", "alive.", "12"},
+            {"she wants to kill him.", "10", "she wants her father back.", "13"},
+            {"resort to cannibalism.", "-1", "through their mutual hatred of Michael, they realize they’re in love and get married. Their wedding cake is made from Michael’s rotting corpse", "-1"},
+            {"herself.", "-1", "Xerneas. Then herself.", "-1"},
+            {"The bloody shroud of Death descends upon the night.", "14", "the two men reconcile their differences and part as friends with no violence.", "-1"},
+            {"doesn’t care what she thinks. He decides that she’ll just be a hindrance and kills her.", "-1", "eralizes that, after all they’ve been through together, he’s fallen in love with her.", "15"},
+            {"Xerneas.", "-1", "Michael.", "-1"},
+            {"calls him an idiot and resorts to cannibalism.", "-1", "returns the feelings and they get married.", "-1"},
+
+    };
 
 
-
-
+    private String[] responseSet3 = {
+            "She sets out on her own to find help and hitchhikes along the road until she meets a young man named Xerneas who",
+            "Alone and woebegone, she decides to",
+            "She mulls over what Xerneas told her about the man who killed his father and realizes that it’s",
+            "After hearing of his search, Celia realizes that it’s her father Xerneas is looking for. She doesn’t reveal the information, afraid he’ll kill her out of spite. She decides to",
+            "Xerneas comes crawling back and shamelessly begs for the information. Celia admits to him that her father, Michael, is the man he’s searching for. She",
+            "Celia searches every corner of the Earth to find her father until",
+            "When they finally find her father, they find him",
+            "She can’t let Xerneas kill her father, because",
+            "As a joint effort, they end her father’s life. Afterwards, they",
+            "Devastated, Celia kills",
+            "Michael is alive, and Celia rejoices. Xerneas confronts Michael, and",
+            "Faced with her desperation, Xerneas",
+            "The man on the ground, drawing in his final, gasping breaths, is",
+            "Xerneas drops to his knees and confesses his feelings to Celia. Celia"
     };
     private List<String> yourStory;
 
-
-
-
-    public StoryLine( int num )
-    {
-
-        this.num = num;
-        if(num == 1)
-        {
-
-        }
-
-    }
     public StoryLine()
     {
 
@@ -153,15 +154,6 @@ public class StoryLine {
     }
 
 
-    /* This will return the STARTING LIST of choices for a plot. */
-    public String[] getStoryList()
-    {
-
-
-        return storyList;
-
-
-    }
 
     public void addToStory(String strToAdd)
     {
