@@ -16,6 +16,8 @@ public class MainFrame extends JFrame implements MouseListener {
     StoryLine sl = new StoryLine();
     private int storyLine = 0;
     private int tier = 0;
+    private static final int OPTION_1 = 1;
+    private static final int OPTION_2 = 3;
     private JButton option1;
     private JButton option2;
     private JButton option3;
@@ -23,7 +25,7 @@ public class MainFrame extends JFrame implements MouseListener {
 
      // Create all the JFrames!
      JFrame frame = new JFrame();
-     frame.setSize(550, 600);
+     frame.setSize(600, 700);
      frame.setLayout(new GridLayout(4, 1));
 
      frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -40,6 +42,7 @@ public class MainFrame extends JFrame implements MouseListener {
      option1 = new JButton();
      option1.addMouseListener( this );
 
+
      option2 = new JButton();
      option2.addMouseListener( this );
 
@@ -50,6 +53,7 @@ public class MainFrame extends JFrame implements MouseListener {
      option1.setText( sl.getStoryLine( 1 ));
      option2.setText( sl.getStoryLine( 2 ));
      option3.setText( sl.getStoryLine( 3 ));
+
 
      // Add the EMPTY option
      // buttons to the form itself.
@@ -69,7 +73,6 @@ public class MainFrame extends JFrame implements MouseListener {
         option2.setEnabled( false );
         option3.setEnabled( false );
 
-            int charNum = 0; // Char count before new line break.
         for( int x = 0; x < str.length(); x++ ) {
             book.append(str.substring(x, x + 1));
                 try {
@@ -86,18 +89,13 @@ public class MainFrame extends JFrame implements MouseListener {
 
     }
 
-    private void setButtonText( JButton b, String s)
-    {
-
-    }
-
-
-    public void makeChoice( JButton b, String choice )
+    public void makeChoice( JButton btn, String choice )
     {
 
         typeString( choice, book );
 
-
+        btn.setText( sl.getStoryChoice( storyLine, tier, OPTION_1 ));
+        btn.setText( sl.getStoryChoice( storyLine, tier, OPTION_2 ));
     }
 
     @Override
@@ -106,17 +104,19 @@ public class MainFrame extends JFrame implements MouseListener {
         JButton clicked = (JButton) e.getComponent();
         boolean isStarted = false;
         int clickedNum = -1;
+        int choiceOne = 1;
+        int choiceTwo = 3;
 
         if( clicked.equals( option1 ) )
         {
 
             clickedNum = 1;
             if( isStarted == false ) {
-                storyLine = 0;
+                storyLine = 1;
                 typeString(sl.getStoryLines(0), book);
-                option1.setText(sl.getStoryChoice(0, 1, 1));
-                option2.setText(sl.getStoryChoice(0, 1, 3));
-
+                option1.setText(sl.getTier( storyLine, 0, choiceOne));
+                option1.setText(sl.getTier( storyLine, 0, choiceTwo));
+                isStarted = true;
             }
             else
             {
@@ -132,17 +132,19 @@ public class MainFrame extends JFrame implements MouseListener {
             clickedNum = 2;
             if ( isStarted == false )
             {
-                storyLine = 1;
-                typeString(sl.getStoryLines(1), book);
-            option1.setText(sl.getStoryChoice(0, 2, 1));
-            option2.setText(sl.getStoryChoice(0, 2, 3));
+                storyLine = 2;
+                makeChoice( option1, sl.getTier( storyLine, tier, OPTION_1));
+                makeChoice( option2, sl.getTier( storyLine, tier, OPTION_2));
+
+
+            isStarted = true;
+
             }
             else
             {
 
-                option1.setText(sl.getTier( storyLine, 3, 1));
-                option2.setText(sl.getTier( storyLine, 3, 3));
-
+                option1.setText(sl.getTier( storyLine, 3, OPTION_1 - 1));
+                option2.setText(sl.getTier( storyLine, 3, OPTION_2 - 1));
             }
 
         }
@@ -150,7 +152,7 @@ public class MainFrame extends JFrame implements MouseListener {
 
             clickedNum = 3;
         if( isStarted == false ) {
-            storyLine = 2;
+            storyLine = 3;
             typeString(sl.getStoryLines(2), book);
             option1.setText(sl.getStoryChoice(0, 3, 1));
             option2.setText(sl.getStoryChoice(0, 3, 3));
@@ -163,9 +165,9 @@ public class MainFrame extends JFrame implements MouseListener {
 
         }
 
-
         }
-
+        option1.updateUI();
+        option2.updateUI();
 
 
 
