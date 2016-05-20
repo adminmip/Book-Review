@@ -220,29 +220,41 @@ public String getStoryLines(int num)
 
     }
 
-    public String getChoice(int storyLine, int tier, int btnNum)
+    public String getTier( int story, int tier, int choice )
     {
 
-        if( storyLine == 1 )
+        switch( story )
         {
-
-            return choiceSet1[tier][btnNum];
+            case 1:
+                return choiceSet1[tier][choice];
+            case 2:
+                return choiceSet2[tier][choice];
+            case 3:
+                return choiceSet3[tier][choice];
+            default:
+                return "";
 
         }
-        else if( storyLine == 2)
-        {
 
-            return choiceSet2[tier][btnNum];
-
-        }
-        else if( storyLine == 3)
-        {
-
-
-            return choiceSet3[tier][btnNum];
-
-        }
-return "";
     }
 
+    public String[][] getChoiceSet(int num)
+    {
+
+        switch( num )
+        {
+            case 1:
+                return choiceSet1;
+            case 2:
+                return choiceSet2;
+            case 3:
+                return choiceSet3;
+            default:
+                return null;
+
+        }
+
+
+
+    }
 }

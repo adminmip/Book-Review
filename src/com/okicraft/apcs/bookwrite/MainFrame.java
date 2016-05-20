@@ -12,10 +12,9 @@ import java.awt.event.MouseListener;
  */
 public class MainFrame extends JFrame implements MouseListener {
 
-
-    boolean isDoneTyping = false;
     JTextArea book;
     StoryLine sl = new StoryLine();
+    private int storyLine = 0;
     private int tier = 0;
     private JButton option1;
     private JButton option2;
@@ -106,51 +105,65 @@ public class MainFrame extends JFrame implements MouseListener {
 
         JButton clicked = (JButton) e.getComponent();
         boolean isStarted = false;
+        int clickedNum = -1;
 
         if( clicked.equals( option1 ) )
         {
 
+            clickedNum = 1;
             if( isStarted == false ) {
+                storyLine = 0;
                 typeString(sl.getStoryLines(0), book);
                 option1.setText(sl.getStoryChoice(0, 1, 1));
-                option2.setText(sl.getStoryChoice(0, 1, 2));
+                option2.setText(sl.getStoryChoice(0, 1, 3));
 
             }
             else
             {
-
-                sl.getChoice(0, 1, )
-
+                option1.setText(sl.getTier( storyLine, 3, 1));
+                option2.setText(sl.getTier( storyLine, 3, 3));
+                typeString( sl.getTier( storyLine, tier, clickedNum), book);
             }
 
 
         }
         else if( clicked.equals( option2 ) ) {
 
+            clickedNum = 2;
             if ( isStarted == false )
             {
-
+                storyLine = 1;
                 typeString(sl.getStoryLines(1), book);
             option1.setText(sl.getStoryChoice(0, 2, 1));
-            option2.setText(sl.getStoryChoice(0, 2, 2));
+            option2.setText(sl.getStoryChoice(0, 2, 3));
             }
             else
             {
 
-                sl.getChoice(0, 2, 1)
-                typeString();
+                option1.setText(sl.getTier( storyLine, 3, 1));
+                option2.setText(sl.getTier( storyLine, 3, 3));
 
             }
 
         }
         else if( clicked.equals( option3 ) ) {
 
+            clickedNum = 3;
         if( isStarted == false ) {
-
+            storyLine = 2;
             typeString(sl.getStoryLines(2), book);
-            option1.setText(sl.getChoice(0, 3, 1));
-            option2.setText(sl.getChoice(0, 3, 2));
+            option1.setText(sl.getStoryChoice(0, 3, 1));
+            option2.setText(sl.getStoryChoice(0, 3, 3));
         }
+            else
+        {
+
+            option1.setText(sl.getTier( storyLine, 3, 1));
+            option2.setText(sl.getTier( storyLine, 3, 3));
+
+        }
+
+
         }
 
 
