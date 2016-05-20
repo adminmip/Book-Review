@@ -1,104 +1,89 @@
 package com.okicraft.apcs.bookwrite;
 
-import javax.sound.sampled.*;
+import com.sun.javafx.image.BytePixelSetter;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * Created by skitt on 5/10/2016.
  */
-public class MainFrame extends JFrame  {
+public class MainFrame extends JFrame implements MouseListener {
 
-    private StoryLine sl = new StoryLine();
-    SoundPlayer sp = new SoundPlayer();
-    ChoiceListener cl = new ChoiceListener();
+
+    boolean isDoneTyping = false;
+    JTextArea book;
+    StoryLine sl = new StoryLine();
+    private int tier = 0;
     private JButton option1;
     private JButton option2;
     private JButton option3;
-
  public MainFrame() {
 
      // Create all the JFrames!
      JFrame frame = new JFrame();
      frame.setSize(550, 600);
-     frame.setLayout(new GridLayout());
+     frame.setLayout(new GridLayout(4, 1));
 
      frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
      frame.setResizable(false);
 
      // TextArea code, for the book to be typed into.
-     JTextArea book = new JTextArea();
+     book = new JTextArea();
      book.setLineWrap(true);
-     book.setSize(550, 50);
-
 
      frame.add(book);
 
      // Size the buttons.
      // Instantiate all of the buttons, with the storyline options on them.
      option1 = new JButton();
-     option2 = new JButton();
-     option3 = new JButton();
+     option1.addMouseListener( this );
 
-     // Add the EMPTY option buttons to the form itself.
+     option2 = new JButton();
+     option2.addMouseListener( this );
+
+
+     option3 = new JButton();
+     option3.addMouseListener( this );
+
+     option1.setText( sl.getStoryLine( 1 ));
+     option2.setText( sl.getStoryLine( 2 ));
+     option3.setText( sl.getStoryLine( 3 ));
+
+     // Add the EMPTY option
+     // buttons to the form itself.
      frame.add(option1);
      frame.add(option2);
      frame.add(option3);
 
-
-     option1.setSize(500, 50);
-     option2.setSize(500, 50);
-     option3.setSize(500, 50);
-
-     option1.setHorizontalAlignment(frame.getWidth() / 2);
-     option2.setHorizontalAlignment(frame.getWidth() / 2);
-     option3.setHorizontalAlignment(frame.getWidth() / 2);
-
-     option1.setVerticalAlignment();
-     option2.setVerticalAlignment();
-     option3.setVerticalAlignment();
-
+     frame.setVisible( true );
      typeString(sl.getIntro(), book); // Pass in the intro and the text area
 
  }
     // This method types out your book like it was actually being typed.
     public void typeString(String str, JTextArea book)
     {
+
+        option1.setEnabled( false );
+        option2.setEnabled( false );
+        option3.setEnabled( false );
+
             int charNum = 0; // Char count before new line break.
         for( int x = 0; x < str.length(); x++ ) {
             book.append(str.substring(x, x + 1));
                 try {
-                Thread.sleep(100);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
         }
-    }
+        option1.setEnabled( true );
+        option2.setEnabled( true );
+        option3.setEnabled( true );
 
-
-    public void setupButtons( JFrame frame ) {
-        // Instantiate all of the buttons, with the storyline options on them.
-        this.option1 = new JButton();
-        this.option2 = new JButton();
-        this.option3 = new JButton();
-
-        this.option1.setSize(50, 600);
-        this.option2.setSize(50, 600);
-        this.option3.setSize(50, 600);
-
-        this.option1.setHorizontalAlignment( frame.getWidth() / 2 );
-        this.option2.setHorizontalAlignment( frame.getWidth() / 2 );
-        this.option3.setHorizontalAlignment( frame.getWidth() / 2 );
-
-        this.option1.setVerticalAlignment( frame.getHeight() - option1.getHeight() );
-        this.option2.setVerticalAlignment( frame.getHeight() - option2.getHeight() );
-        this.option3.setVerticalAlignment( frame.getHeight() - option3.getHeight() );
-
-        // Add the EMPTY option buttons to the form itself.
-        frame.add( option1 );
-        frame.add( option2 );
-        frame.add( option3 );
 
     }
 
@@ -106,5 +91,93 @@ public class MainFrame extends JFrame  {
     {
 
     }
+
+
+    public void makeChoice( JButton b, String choice )
+    {
+
+        typeString( choice, book );
+
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+        JButton clicked = (JButton) e.getComponent();
+        boolean isStarted = false;
+
+        if( clicked.equals( option1 ) )
+        {
+
+            if( isStarted == false ) {
+                typeString(sl.getStoryLines(0), book);
+                option1.setText(sl.getStoryChoice(0, 1, 1));
+                option2.setText(sl.getStoryChoice(0, 1, 2));
+
+            }
+            else
+            {
+
+                sl.getChoice(0, 1, )
+
+            }
+
+
+        }
+        else if( clicked.equals( option2 ) ) {
+
+            if ( isStarted == false )
+            {
+
+                typeString(sl.getStoryLines(1), book);
+            option1.setText(sl.getStoryChoice(0, 2, 1));
+            option2.setText(sl.getStoryChoice(0, 2, 2));
+            }
+            else
+            {
+
+                sl.getChoice(0, 2, 1)
+                typeString();
+
+            }
+
+        }
+        else if( clicked.equals( option3 ) ) {
+
+        if( isStarted == false ) {
+
+            typeString(sl.getStoryLines(2), book);
+            option1.setText(sl.getChoice(0, 3, 1));
+            option2.setText(sl.getChoice(0, 3, 2));
+        }
+        }
+
+
+
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+
 
 }

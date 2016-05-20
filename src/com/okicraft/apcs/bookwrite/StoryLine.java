@@ -1,6 +1,6 @@
 package com.okicraft.apcs.bookwrite;
 
-import java.lang.reflect.GenericArrayType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -129,12 +129,21 @@ public class StoryLine {
             "The man on the ground, drawing in his final, gasping breaths, is",
             "Xerneas drops to his knees and confesses his feelings to Celia. Celia"
     };
-    private List<String> yourStory;
+
+   private ArrayList<String[][]> choiceSets = new ArrayList<>();
+    private ArrayList<String[]> responseSets = new ArrayList<>();
+    private ArrayList<String> yourStory = new ArrayList<>();
 
     public StoryLine()
     {
 
+        choiceSets.add( choiceSet1 );
+        choiceSets.add( choiceSet2 );
+        choiceSets.add( choiceSet3 );
 
+        responseSets.add( responseSet1 );
+        responseSets.add( responseSet2 );
+        responseSets.add( responseSet3 );
 
     }
 
@@ -153,8 +162,6 @@ public class StoryLine {
 
     }
 
-
-
     public void addToStory(String strToAdd)
     {
 
@@ -162,5 +169,80 @@ public class StoryLine {
 
     }
 
+
+    public String getStoryChoice( int num, int story, int btnNum ) {
+        switch (story) {
+
+            case 1:
+                if (btnNum == 1) {
+                    return choiceSet1[num][0];
+                } else {
+                    return choiceSet1[num][2];
+
+
+                }
+            case 2:
+                if (btnNum == 1) {
+                    return choiceSet2[num][0];
+                } else {
+                    return choiceSet2[num][2];
+
+                }
+            case 3:
+                if(btnNum == 1)
+                {
+
+                    return choiceSet3[num][0];
+
+                }
+                else
+                {
+
+                    return choiceSet3[num][2];
+
+                }
+
+            default:
+                return "";
+        }
+    }
+
+
+    String[] storyLine = { "  A young man named Xerneas is looking for the man who killed his father. He goes on a journey to",
+            "  A fifty-five-year-old man, Michael, is fighting for his life, on the run from",
+            "  Celia, a 16-year-old girl, must learn to survive in a world without her father. He’s"
+};
+
+public String getStoryLines(int num)
+    {
+
+        return storyLine[ num ];
+
+    }
+
+    public String getChoice(int storyLine, int tier, int btnNum)
+    {
+
+        if( storyLine == 1 )
+        {
+
+            return choiceSet1[tier][btnNum];
+
+        }
+        else if( storyLine == 2)
+        {
+
+            return choiceSet2[tier][btnNum];
+
+        }
+        else if( storyLine == 3)
+        {
+
+
+            return choiceSet3[tier][btnNum];
+
+        }
+return "";
+    }
 
 }

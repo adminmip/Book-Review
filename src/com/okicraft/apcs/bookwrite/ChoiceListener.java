@@ -1,5 +1,6 @@
 package com.okicraft.apcs.bookwrite;
 
+import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -8,9 +9,19 @@ import java.awt.event.MouseListener;
  */
 public class ChoiceListener implements MouseListener {
 
+
+
 // MouseListener Methods
     @Override
     public void mouseClicked(MouseEvent e) {
+
+        JButton clicked = (JButton) e.getComponent();
+        if( clicked.getText().contains( "1." ) )
+        {
+
+
+
+        }
 
     }
 
